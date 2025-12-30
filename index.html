@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineWorld - Увлекательная игра в мире блоков</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0d1b2a;
+            color: #e0e1dd;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: #1b263b;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            color: #ff9e00;
+            font-size: 2.5rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, #ff9e00, #ffd166);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: #e0e1dd;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        nav a:hover {
+            color: #ff9e00;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(13, 27, 42, 0.9), rgba(13, 27, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero-content h2 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: #ffd166;
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #b8c2cc;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #ff9e00, #ffd166);
+            color: #0d1b2a;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 15px rgba(255, 158, 0, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 158, 0, 0.4);
+        }
+        
+        .features {
+            padding: 80px 0;
+            background-color: #1b263b;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: #ffd166;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background-color: #0d1b2a;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #415a77;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #ff9e00;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffd166;
+        }
+        
+        .gallery {
+            padding: 80px 0;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .install {
+            padding: 80px 0;
+            background-color: #1b263b;
+            text-align: center;
+        }
+        
+        .install-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .install-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #b8c2cc;
+        }
+        
+        .store-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            background-color: #0d1b2a;
+            padding: 20px 40px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #ffd166;
+            font-weight: bold;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            border: 2px solid #415a77;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .store-link:hover {
+            background-color: #ff9e00;
+            color: #0d1b2a;
+            transform: translateY(-5px);
+        }
+        
+        .store-icon {
+            font-size: 2rem;
+        }
+        
+        footer {
+            background-color: #0a141f;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            color: #ffd166;
+        }
+        
+        .copyright {
+            color: #778da9;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cube logo-icon"></i>
+                    <h1>MineWorld</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#features">Особенности</a></li>
+                        <li><a href="#gallery">Галерея</a></li>
+                        <li><a href="#install">Установить</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Откройте мир бесконечных возможностей</h2>
+                <p>MineWorld - это захватывающая игра в стиле песочницы, где вы можете строить, исследовать и выживать в уникальном мире, созданном из блоков. Создавайте невероятные сооружения, находите редкие ресурсы и сражайтесь с опасными существами!</p>
+                <a href="#install" class="btn">Играть бесплатно</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Особенности игры</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-mountain feature-icon"></i>
+                    <h3>Огромный открытый мир</h3>
+                    <p>Исследуйте бескрайние просторы с разнообразными биомами, пещерами и подземельями. Каждый мир уникален и генерируется специально для вас.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-hammer feature-icon"></i>
+                    <h3>Свобода творчества</h3>
+                    <p>Стройте что угодно - от маленькой хижины до огромного замка. Используйте различные материалы и инструменты для реализации своих идей.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-dragon feature-icon"></i>
+                    <h3>Выживание и приключения</h3>
+                    <p>Сражайтесь с опасными мобами, добывайте ресурсы, создавайте оружие и броню. Ночью мир становится особенно опасным!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Галерея игры</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://static.rustore.ru/imgproxy/gjABCdm_NbIVS_Cw7rLpLYXcNpTcCOekT3EX7t9t5a8/preset:web_scr_lnd_784/plain/https://static.rustore.ru/2025/12/29/3a/apk/2063686010/content/SCREENSHOT/14e76f7a-bb34-4b36-89cc-0586b23c618c.png@webp" alt="Строительство в MineWorld">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://static.rustore.ru/imgproxy/489EzTPA4QLk8JsAd1lNu3YM6GNx8R41-0l1Tf38cXM/preset:web_scr_lnd_784/plain/https://static.rustore.ru/2025/12/29/0c/apk/2063686010/content/SCREENSHOT/1df37eb6-c9d6-4fb1-8249-80e9c41958e1.png@webp" alt="Игра с друзьями">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://static.rustore.ru/imgproxy/p-A0mOn3QxQdBFFcfcQZC84i0n--jf9N338NqVwsFzg/preset:web_scr_lnd_784/plain/https://static.rustore.ru/2025/12/29/7e/apk/2063686010/content/SCREENSHOT/ef7356e1-6e84-4792-b8b9-30756bcaf2af.png@webp" alt="Развлечения">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://static.rustore.ru/imgproxy/iZUiBlJjJw2CVx6YxqDeXB_W2MIIsBPkm_6ck5LH0yY/preset:web_scr_lnd_784/plain/https://static.rustore.ru/2025/12/29/16/apk/2063686010/content/SCREENSHOT/fc6976fd-3c3b-43ea-98b0-6c7d28278db9.png@webp" alt="Креативные постройки">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="install" id="install">
+        <div class="container">
+            <div class="install-content">
+                <h2 class="section-title">Установите MineWorld</h2>
+                <p>Присоединяйтесь к миллионам игроков по всему миру! MineWorld доступна для установки на Android устройства через RuStore - официальный магазин приложений.</p>
+                
+                <a href="https://www.rustore.ru/catalog/app/com.mine.world.craft" class="store-link" target="_blank">
+                    <i class="fas fa-download store-icon"></i>
+                    <span>Установить через RuStore</span>
+                </a>
+                
+                <p style="margin-top: 30px; font-size: 1rem;">Нажмите на кнопку выше, чтобы перейти на страницу установки игры в RuStore. Игра бесплатна и регулярно обновляется.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-cube"></i>
+                    <span>MineWorld</span>
+                </div>
+                <p class="copyright">© 2023 MineWorld. Все права защищены. Это демонстрационный сайт для игры.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Плавная прокрутка по якорным ссылкам
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Анимация появления элементов при прокрутке
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Назначаем анимацию для карточек особенностей
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(card);
+        });
+        
+        // Назначаем анимацию для галереи
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
